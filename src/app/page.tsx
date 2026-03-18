@@ -4,14 +4,15 @@ import { useState } from "react";
 import MangaPageView from "@/components/MangaPage";
 import EraSelector from "@/components/EraSelector";
 import FreeformInput from "@/components/FreeformInput";
+import ShowcaseGallery from "@/components/ShowcaseGallery";
 import { generateMangaScript, generateFromFreeform } from "@/lib/script-generator";
 import type { MangaPage, ReadingDirection } from "@/types/manga";
 
-type InputMode = "freeform" | "browse";
+type InputMode = "freeform" | "browse" | "showcase";
 
 export default function Home() {
   const [page, setPage] = useState<MangaPage | null>(null);
-  const [mode, setMode] = useState<InputMode>("freeform");
+  const [mode, setMode] = useState<InputMode>("showcase");
   const [direction, setDirection] = useState<ReadingDirection>("rtl");
   const [selectedEra, setSelectedEra] = useState<string>();
   const [selectedEvent, setSelectedEvent] = useState<string>();
@@ -86,6 +87,16 @@ export default function Home() {
             ✍️ Describe a moment
           </button>
           <button
+            onClick={() => setMode("showcase")}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              mode === "showcase"
+                ? "bg-red-600 text-white"
+                : "bg-gray-800 text-gray-400 hover:text-white"
+            }`}
+          >
+            🎴 Showcase
+          </button>
+          <button
             onClick={() => setMode("browse")}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               mode === "browse"
@@ -99,19 +110,19 @@ export default function Home() {
 
         {/* Input area */}
         <div className="mb-8">
-          {mode === "freeform" ? (
-            <FreeformInput onSubmit={handleFreeform} />
-          ) : (
+          {mode === "freeform" && <FreeformInput onSubmit={handleFreeform} />}
+          {mode === "browse" && (
             <EraSelector
               onSelect={handleBrowseSelect}
               selectedEra={selectedEra}
               selectedEvent={selectedEvent}
             />
           )}
+          {mode === "showcase" && <ShowcaseGallery />}
         </div>
 
         {/* Generated page */}
-        {page && (
+        {page && mode !== "showcase" && (
           <div className="flex flex-col items-center">
             <MangaPageView page={page} maxWidth={Math.min(500, typeof window !== "undefined" ? window.innerWidth - 32 : 500)} />
 
@@ -163,7 +174,7 @@ export default function Home() {
         )}
 
         {/* Feature showcase when no page */}
-        {!page && (
+        {!page && mode !== "showcase" && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
             <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-700">
               <div className="text-3xl mb-3">📖</div>
