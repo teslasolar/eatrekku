@@ -1,0 +1,95 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#1a1a2e;--card:#16213e;--accent:#e94560;--accent2:#daa520;--text:#f5f5f5;--muted:#a0a0b0;--dim:#666}
+body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+.header{border-bottom:1px solid #2a2a3e;background:rgba(22,33,62,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:50}
+.header-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:22px;font-weight:900;letter-spacing:-.5px}
+.logo-ea{color:var(--accent)}
+.logo-jp{color:var(--muted);font-size:14px;margin-left:8px;font-weight:400}
+.logo-sub{display:block;font-size:10px;color:var(--dim);font-weight:400}
+.nav{display:flex;gap:5px;flex-wrap:wrap}
+.nav a{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;transition:all .2s;background:#1e2a45;color:var(--muted)}
+.nav a:hover,.nav a.active{background:var(--accent);color:#fff}
+
+/* Page container */
+.page-container{max-width:800px;margin:0 auto;padding:32px 16px}
+.page-title{text-align:center;margin-bottom:24px}
+.page-title h1{font-size:28px;font-weight:900;margin-bottom:4px}
+.page-title .meta{font-size:13px;color:var(--muted)}
+.page-title .reading-dir{font-size:11px;color:var(--dim);margin-top:4px}
+
+/* Manga page frame */
+.manga-page{background:#f5f0e8;position:relative;overflow:hidden;margin:0 auto;box-shadow:4px 4px 20px rgba(0,0,0,.4),0 0 60px rgba(0,0,0,.1);border-radius:2px}
+.manga-panel{position:absolute;overflow:hidden;border:3px solid #1a1a1a;background:#fff;transition:transform .2s ease}
+.manga-panel:hover{transform:scale(1.01);z-index:10}
+.panel-inner{position:relative;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;padding:8px;overflow:hidden}
+
+/* Panel types */
+.panel-establishing{background:linear-gradient(180deg,#e8dcc8 0%,#d4c4a8 100%)}
+.panel-closeup{background:linear-gradient(135deg,#fff 0%,#f0e8d8 100%)}
+.panel-action{background:linear-gradient(45deg,#f8f0e0 0%,#fff 50%,#f0e0c8 100%)}
+.panel-reaction{background:#fff}
+.panel-splash{background:linear-gradient(180deg,#f8f0e0 0%,#e8d8c0 50%,#d8c8a8 100%)}
+.panel-bleed{background:linear-gradient(180deg,#f0e0c8 0%,#e0d0b0 100%);border-width:0!important}
+.panel-small_inset{background:#fff}
+.panel-black{background:#1a1a1a;color:#fff}
+.panel-tall_narrow{background:#fff}
+
+/* Scene description */
+.scene-desc{text-align:center;font-size:11px;color:#666;font-style:italic;padding:0 6px;margin-bottom:4px;position:relative;z-index:2;line-height:1.35}
+.char-names{text-align:center;font-size:9px;color:#999;margin-bottom:4px}
+
+/* Speech bubbles */
+.bubble{position:relative;padding:7px 11px;margin:3px auto;font-size:11px;line-height:1.3;max-width:85%;z-index:5;text-align:center}
+.bubble .speaker{display:block;font-size:9px;color:#999;margin-bottom:1px}
+.bubble-normal{background:#fff;border:2px solid #1a1a1a;border-radius:50%;padding:10px 14px}
+.bubble-shouting{background:#fff;border:3px solid #1a1a1a;border-radius:4px;font-weight:700;clip-path:polygon(5% 0%,15% 2%,25% 0%,35% 3%,45% 0%,55% 2%,65% 0%,75% 3%,85% 0%,95% 2%,100% 5%,98% 15%,100% 25%,97% 35%,100% 45%,98% 55%,100% 65%,97% 75%,100% 85%,98% 95%,95% 100%,85% 98%,75% 100%,65% 97%,55% 100%,45% 98%,35% 100%,25% 97%,15% 100%,5% 98%,0% 95%,2% 85%,0% 75%,3% 65%,0% 55%,2% 45%,0% 35%,3% 25%,0% 15%,2% 5%);padding:12px 16px}
+.bubble-thinking{background:#fff;border:2px dashed #1a1a1a;border-radius:50%;padding:10px 14px}
+.bubble-whisper{background:#fff;border:1px dashed #666;border-radius:50%;font-size:10px;color:#666;padding:10px 14px}
+.bubble-narration{background:#1a1a1a;color:#fff;border-radius:2px;font-size:10px;padding:6px 10px}
+.bubble-trembling{background:#fff;border:2px solid #1a1a1a;border-radius:50%;padding:10px 14px;animation:tremble .1s infinite}
+.bubble-sfx{font-family:"Impact","Arial Black",sans-serif;font-weight:900;font-size:20px;color:#1a1a1a;text-shadow:2px 2px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff;background:none;border:none}
+.bubble-electronic{background:#e8e8e8;border:2px solid #333;border-radius:2px;font-family:monospace;font-size:10px;padding:6px 10px}
+
+@keyframes tremble{
+  0%{transform:translate(0,0)}25%{transform:translate(1px,-1px)}
+  50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}
+  100%{transform:translate(-1px,-1px)}
+}
+
+/* SFX */
+.sfx-text{font-family:"Impact","Arial Black",sans-serif;font-weight:900;font-size:22px;color:#1a1a1a;text-shadow:2px 2px 0 #fff,-2px -2px 0 #fff,2px -2px 0 #fff,-2px 2px 0 #fff;position:absolute;z-index:6;transform:rotate(-15deg);white-space:nowrap;bottom:6px;right:8px}
+
+/* Emotion markers */
+.emotion{position:absolute;top:4px;right:8px;font-size:16px;z-index:7}
+.emotion + .emotion{right:28px}
+
+/* Speed / radial lines */
+.speed-lines{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 3px,rgba(0,0,0,.03) 3px,rgba(0,0,0,.03) 4px);z-index:1;pointer-events:none}
+.radial-lines{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 20%,rgba(0,0,0,.02) 20%,transparent 21%,rgba(0,0,0,.02) 40%,transparent 41%);z-index:1;pointer-events:none}
+
+/* Footnotes */
+.footnotes{background:rgba(26,26,26,.92);color:#f5f0e8;border-radius:8px;padding:16px 20px;margin:24px auto 0;max-width:560px;font-size:12px;line-height:1.5}
+.footnotes h4{font-size:12px;font-weight:700;color:#daa520;margin-bottom:8px}
+.footnote{margin-bottom:10px}
+.footnote:last-child{margin-bottom:0}
+.footnote .fn-label{color:#daa520;font-family:monospace;font-size:10px}
+
+/* Page nav */
+.page-nav{display:flex;justify-content:center;gap:8px;margin-top:24px;flex-wrap:wrap}
+.page-nav a{display:inline-block;padding:8px 16px;background:#1e2a45;border:1px solid #2a2a3e;border-radius:8px;font-size:12px;color:var(--muted);transition:all .2s}
+.page-nav a:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.page-nav a.current{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* Footer */
+.footer{border-top:1px solid #2a2a3e;margin-top:48px;padding:24px 20px;text-align:center;font-size:11px;color:var(--dim)}
+
+/* Responsive */
+@media(max-width:600px){
+  .manga-page{width:100%!important}
+  .header-inner{flex-direction:column;gap:8px}
+  .page-title h1{font-size:22px}
+}
